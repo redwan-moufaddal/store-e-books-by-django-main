@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}{% endblock title %}
+{% block content %}
+		<section class="breadcrumb-section">
+			<h2 class="sr-only">Site Breadcrumb</h2>
+			<div class="container">
+				<div class="breadcrumb-contents">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+							<li class="breadcrumb-item active">Checkout</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</section>
+		<main id="content" class="page-section inner-page-sec-padding-bottom space-db--20">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- Checkout Form s-->
+						<div class="checkout-form">
+							<div class="row row-40">
+								<div class="col-12">
+									<h1 class="quick-title">Checkout</h1>
+									<!-- Slide Down Trigger  -->
+									
+								</div>
+								<div class="col-lg-7 mb--20">
+									<!-- Billing Address -->
+									<div id="billing-form" class="mb-40">
+									<br><br><br>
+										<div class="row" id="paypal-button-container">
+											
+										</div>
+									</div>
+									<!-- Shipping Address -->
+									
+									<div class="order-note-block mt--30">
+										<label for="order-note">Order notes</label>
+										<textarea id="order-note" cols="30" rows="10" class="order-note"
+											placeholder="Notes about your order ."></textarea>
+									</div>
+								</div>
+								<div class="col-lg-5">
+									<div class="row">
+										<!-- Cart Total -->
+										<div class="col-12">
+											<div class="checkout-cart-total">
+												<h2 class="checkout-title">YOUR ORDER</h2>
+												<h4>Product <span>Total</span></h4>
+												<ul>
+													{% for prd in products %}
+													<li><span class="left">{{prd.product.name|slice:":35"|insert_linebreaks:35}}</span> <span
+															class="right">${{prd.product.price_new}}</span></li>
+													{% endfor %}
+												</ul>
+												<h4>Grand Total <span style="color:green">${{somme}}</span></h4>
+												
+												<br>
+												
+<div id="paypal-button-container"></div>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=AUoc07DMbG9NZ5W6NLL9L1SRoqroHWTOInqTVmKJu89PdHmsrdygRopvO4_VlRVHbS-M68Y27vb9Zx4J"></script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'paypal'
+        },
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '10.00' // Enter the amount to be charged
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name);
+            // You can handle post-transaction tasks here, like updating databases, sending emails, etc.
+          });
+        }
+      }).render('#paypal-button-container');
+    }
+    
+    // Initialize PayPal button when the page loads
+    window.onload = function() {
+      initPayPalButton();
+    };
+  </script>
+</body>
+</body>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	{% endblock content %}

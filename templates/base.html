@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from htmldemo.net/pustok/pustok/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Jan 2024 21:00:55 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Use Minified Plugins Version For Fast Page Load -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/plugins.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/main.css' %}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    
+</head>
+
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+{% include "parts/topbar.html" %}
+{% include "parts/navbar.html" %}
+
+
+{% block content %}
+{% endblock content %}
+
+{% include "parts/footer.html" %}
+
+
+
+<!-- Use Minified Plugins Version For Fast Page Load -->
+<script src="{% static 'js/plugins.js' %}"></script>
+<script src="{% static 'js/ajax-mail.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+
+<!-- Mirrored from htmldemo.net/pustok/pustok/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Jan 2024 21:01:02 GMT -->
+</html>

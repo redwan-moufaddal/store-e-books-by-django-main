@@ -1,0 +1,82 @@
+{% load static %}
+{% load custom_filters %}
+        <div class="header-middle pt--10 pb--10">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <a href="index.html" class="site-brand">
+                            <img src="{% static 'image/logo.png' %}" alt="">
+                        </a>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="header-search-block">
+                            <input type="text" placeholder="Search entire store here">
+                            <button>Search</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="main-navigation flex-lg-right">
+                            <div class="cart-widget">
+                                
+                                {% if user.is_authenticated %}
+                                    <!-- User is authenticated -->
+                                    <div class="login-block">
+                                        <a href="{% url 'account:logout' %}" class="font-weight-bold">Logout</a>
+                                    </div>
+                                {% else %}
+                                    <div class="login-block">
+                                        <a href="{% url 'account:login' %}" class="font-weight-bold">Login</a> <br>
+                                        <span>or</span> <a href="{% url 'account:signup' %}">Register</a>
+                                    </div>
+                                {% endif %}
+                                <div class="cart-block">
+                                    <div class="cart-total">
+                                        <span class="text-number">
+                                            {{count_item}}
+                                        </span>
+                                        <span class="text-item">
+                                            Shopping Cart
+                                        </span>
+                                        <span class="price">
+                                            ${{sum1}}
+                                            <i class="fas fa-chevron-down"></i>
+                                        </span>
+                                    </div>
+                                    <div class="cart-dropdown-block">
+                                        <div class=" single-cart-block ">
+                                            {% for pro in products1 %}
+                                            <div class="cart-product">
+                                                <a href="product-details.html" class="image">
+                                                    <img style="width: 60px; margin-left: 25px" src="{{ pro.first_image.url }}" alt="{{ pro.name }}">
+                                                </a>
+                                                <div class="content" style="margin-left: -15px">
+                                                    <h3 class="title"><a href="product-details.html">{% if pro.name %}
+                                                        {% if pro.name|insert_linebreaks:29|length > 58 %}
+                                                            {{ pro.name|insert_linebreaks:29|slice:":58" }}...
+                                                        {% else %}
+                                                            {{ pro.name|insert_linebreaks:29 }}
+                                                        {% endif %}
+                                                    {% endif %}</a></h3>
+                                                    <p class="price"> ${{pro.price_new}}</p>
+                                                    <del class="price-old">${{prd.price_old}}</del>
+                                                    
+                                            </div>
+                                            
+                                        </div>{% endfor %}
+                                        <div class=" single-cart-block ">
+                                            <div class="btn-block">
+                                                <a href="{% url 'base:cart' %}" class="btn">View Cart <i
+                                                        class="fas fa-chevron-right"></i></a>
+                                                <a href="{% url 'base:checkout' %}" class="btn btn--primary">Check Out <i
+                                                        class="fas fa-chevron-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- @include('menu.htm') -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
